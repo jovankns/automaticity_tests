@@ -1,0 +1,15 @@
+{
+    "base_url": "https://automaticityacademy.ngrok.app",
+    "valid_user": {
+        "email": "validuser@example.com",
+        "password": "ValidPassword123"
+    },
+    "invalid_email": {
+        "email": "1",
+        "password": "randompassword"
+    },
+    "empty_user": {
+        "email": "",
+        "password": ""
+    }
+}
