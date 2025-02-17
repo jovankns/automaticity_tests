@@ -1,26 +1,30 @@
-# Virtual environment
+# Ignore virtual environment directories
 venv/
+.venv/
 
-# Pytest i cache fajlovi
+# Ignore Pytest cache and Python bytecode cache
 __pycache__/
+__pycache__/*
 .pytest_cache/
+.pytest_cache/*
 
-# PyCharm fajlovi (ako koristiš PyCharm)
+# Ignore PyCharm project files
 .idea/
+.idea/*
 
-# Log fajlovi
+# Ignore log files
 logs/
+logs/*
 
-# Screenshots i video snimci testova
+# Ignore test screenshots and videos
 screenshots/
+screenshots/*
 videos/
+videos/*
 
-# Config fajlovi sa osetljivim podacima
+# Ignore configuration files with sensitive data
 #config.json
 .env
-.idea/*
-.idea
-__pycache__/*
-/.pytest_cache/
-/.idea/
-/venv/
+
+# Ignore all __init__.py files in any subdirectory
+**/__init__.py
