@@ -12,7 +12,7 @@ def register_page(driver):
 
 @pytest.fixture
 def unique_user():
-    timestamp = str(int(time.time()))  # Generiše jedinstveni broj baziran na vremenu
+    timestamp = str(int(time.time()))  # Generates a unique number based on the current time
     return {
         "username": f"testuser{timestamp}",
         "email": f"test{timestamp}@mail.com",

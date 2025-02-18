@@ -49,7 +49,8 @@ pip install -r requirements.txt
 ### 4. Run Tests
 #### Run all tests:
 ```bash
-pytest --browser=chrome
+python -m pytest --browser=chrome
+
 ```
 #### Run specific test:
 ```bash

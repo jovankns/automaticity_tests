@@ -1,6 +1,8 @@
-selenium~=4.28.1
-pytest~=8.3.4
-pytest-bdd~=8.1.0
-numpy~=2.2.2
-opencv-python~=4.11.0.86
-PyAutoGUI~=0.9.54
+numpy==2.2.3
+opencv_python==4.11.0.86
+opencv_python_headless==4.11.0.86
+PyAutoGUI==0.9.54
+pytest==8.3.4
+pytest_bdd==8.1.0
+selenium==4.28.1
+webdriver_manager==4.0.2

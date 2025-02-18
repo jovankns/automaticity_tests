@@ -5,70 +5,70 @@ from selenium.common.exceptions import TimeoutException
 class BasePage:
     def __init__(self, driver):
         self.driver = driver
-        self.wait = WebDriverWait(driver, 10)  # Eksplicitno čekanje do 10 sekundi
+        self.wait = WebDriverWait(driver, 10)  # Explicit wait up to 10 seconds
 
     def open_url(self, url):
-        """Otvara zadatu URL adresu"""
+        """Opens the given URL."""
         self.driver.get(url)
 
     def find_element(self, locator, timeout=10):
-        """Čeka da se element pojavi i vraća ga"""
+        """Waits for an element to appear and returns it."""
         try:
             return WebDriverWait(self.driver, timeout).until(
                 EC.presence_of_element_located(locator)
             )
         except TimeoutException:
-            print(f"Element {locator} nije pronađen!")
+            print(f"Element {locator} not found!")
             return None
 
     def find_elements(self, locator, timeout=10):
-        """Čeka da se svi elementi pojave i vraća ih kao listu."""
+        """Waits for all matching elements to appear and returns them as a list."""
         try:
             return WebDriverWait(self.driver, timeout).until(
                 EC.presence_of_all_elements_located(locator)
             )
         except TimeoutException:
-            print(f"Elementi {locator} nisu pronađeni!")
+            print(f"Elements {locator} not found!")
             return []
 
     def click_element(self, locator):
-        """Klikne na element ako postoji"""
+        """Waits for an element to be present on the page."""
         element = self.find_element(locator)
         if element:
             element.click()
 
     def enter_text(self, locator, text):
-        """Unosi tekst u polje"""
+        """Finds an input field, clears it, and enters the given text."""
         element = self.find_element(locator)
         if element:
             element.clear()
             element.send_keys(text)
 
     def wait_for_element(self, locator, timeout=10):
-        """Čeka da se element pojavi na stranici."""
+        """Waits for an element to be present on the page."""
         try:
             return WebDriverWait(self.driver, timeout).until(
                 EC.presence_of_element_located(locator)
             )
         except TimeoutException:
-            print(f" Element {locator} nije pronađen!")
+            print(f" Element {locator} not found!")
             return None
 
     def wait_for_url_contains(self, text, timeout=10):
-        """Čeka da URL sadrži određeni tekst (korisno za proveru preusmeravanja)."""
+        """Waits until the URL contains the specified text (useful for redirects)."""
         try:
             WebDriverWait(self.driver, timeout).until(EC.url_contains(text))
             return True
         except TimeoutException:
-            print(f"URL nije promenjen na očekivani ({text}) u zadatom vremenu.")
+            print(f"URL did not change to expected value ({text}) within timeout.")
             return False
 
     def is_element_visible(self, locator, timeout=10):
-        """Proverava da li je element vidljiv na stranici."""
+        """Checks if an element is visible on the page."""
         try:
             return WebDriverWait(self.driver, timeout).until(
                 EC.visibility_of_element_located(locator)
             )
         except TimeoutException:
-            print(f"Element {locator} nije vidljiv!")
+            print(f"Element {locator} is not visible!")
             return False

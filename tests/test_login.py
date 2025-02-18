@@ -4,7 +4,7 @@ from pytest_bdd import parsers
 from pages.login_page import LoginPage
 from pages.dashboard_page import DashboardPage
 
-# scenarios("../features/login.feature")
+scenarios("../features/login.feature")
 
 @pytest.fixture
 def login_page(driver):
@@ -39,7 +39,6 @@ def enter_invalid_email(login_page, config):
 
 @when("the user enters incorrect credentials")
 def enter_incorrect_credentials(login_page):
-    """Unosi validan email ali pogrešnu lozinku i šalje formu."""
     login_page.enter_email("validuser@example.com")  # Validan email
     login_page.enter_password("WrongPassword123")  # Pogrešna lozinka
     login_page.submit()
@@ -47,21 +46,16 @@ def enter_incorrect_credentials(login_page):
 
 @then("the user should be redirected to the dashboard")
 def verify_dashboard_loaded(driver):
-    # Čekamo da se dashboard učita
+    # Wait for the dashboard to load
     assert DashboardPage(driver).is_dashboard_loaded(), "Dashboard did not load."
 
-    # Proveravamo da li je URL tačan
+    # Verify the URL contains 'dashboard'
     assert "dashboard" in driver.current_url, f"Expected 'dashboard' in URL, but found {driver.current_url}"
 
 
 @then(parsers.parse('the error message "{message}" should be displayed'))
 def check_single_error_message(login_page, message):
-    """Proverava da li bilo koja error poruka sadrži očekivani tekst."""
     all_errors = login_page.get_all_error_messages()
 
-    # # Debug ispis
-    # print(f"\n🔍 PRONADJENE ERROR PORUKE: {all_errors}")
-    # print(f"📝 OČEKIVANA ERROR PORUKA: {message}")
-
-    # Proveravamo da li neka error poruka sadrži očekivanu poruku
+    # Verify if any of the error messages contain the expected message
     assert any(message in error for error in all_errors), f"Expected: {message}, but found: {all_errors}"
